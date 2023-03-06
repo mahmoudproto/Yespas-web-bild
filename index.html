@@ -4,10 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Buildings Selector</title>
+    <style>
+    *{margin:0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    }
+
+    body{
+      background-color: black;
+    }
+
+    </style>
   </head>
   <body style="text-align: center; 
     height: 100%;">
-    <canvas id="unity-canvas" width=980 height=720 style="background: #231F20" width="auto" hieght="auto"></canvas>
+    <canvas id="unity-canvas" width=980 height=720 ></canvas>
     <script src="Build/WebGL Builds.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -17,7 +29,17 @@
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
       }
+ function setCanvasSize (){
+        document.getElementsByTagName('canvas')[0].style="height:" + (window.innerHeight-10) +"px;"
+        + "width:" + (window.innerWidth-10)+"px;"
+        + "background: #000000";
+      }
+      
+      setCanvasSize();
 
+      window.onresize = function(event) {
+        setCanvasSize();
+        };
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/WebGL Builds.data",
         frameworkUrl: "Build/WebGL Builds.framework.js",
